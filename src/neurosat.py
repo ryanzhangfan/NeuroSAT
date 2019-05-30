@@ -70,7 +70,7 @@ class NeuroSAT(nn.Module):
       CL_msg = torch.matmul(L_unpack, C_pre_msg)
       # print(C_hidden.shape, C_pre_msg.shape, CL_msg.shape)
 
-      _, L_state= self.L_update(torch.cat([CL_msg, self.flip(CL_msg, n_vars)], dim=1).unsqueeze(0), L_state)
+      _, L_state= self.L_update(torch.cat([CL_msg, self.flip(L_state[0].squeeze(0), n_vars)], dim=1).unsqueeze(0), L_state)
       # print('L_state',C_state[0].shape, C_state[1].shape)
       
     logits = L_state[0].squeeze(0)
